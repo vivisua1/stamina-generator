@@ -103,45 +103,42 @@
 function generateName() {
 
   // 1️⃣ NOMS ABSTRAITS FORTS
-  const abstract = [
-    "La Brume",
-    "Le Silence",
-    "La Lueur",
-    "L’Instant",
-    "L’Horizon",
-    "La Saison",
-    "La Matière",
-    "Le Flux",
-    "La Ligne",
-    "L’Onde"
-  ];
+const abstract = [
+  "La Brume",
+  "Le Silence",
+  "La Lueur",
+  "L’Instant",
+  "L’Horizon",
+  "La Saison",
+  "La Matière",
+  "La Ligne"
+];
 
   // 2️⃣ STRUCTURES MATIÈRE (nom + adjectif cohérent)
   const material = [
-    ["Le Malt", ["Clair", "Mat", "Simple", "Juste", "Pur"]],
-    ["La Fermentation", ["Lente", "Calme", "Maîtrisée"]],
-    ["Le Houblon", ["Brut", "Libre", "Expressif"]],
-    ["Le Brassin", ["Lent", "Précis"]],
-    ["La Capsule", ["Pure", "Claire"]],
-    ["La Cuve", ["Ouverte", "Calme"]]
-  ];
+  ["Le Malt", ["Clair", "Mat", "Simple", "Juste"]],
+  ["La Fermentation", ["Lente", "Calme", "Maîtrisée"]],
+  ["Le Houblon", ["Sec", "Net", "Précis"]],
+  ["Le Brassin", ["Lent", "Soigné"]],
+  ["La Capsule", ["Sobre", "Claire"]],
+  ["La Cuve", ["Ouverte", "Stabilisée"]]
+];
 
   // 3️⃣ STRUCTURES TEMPS / SENSATION
   const temporal = [
-    "Temps Lent",
-    "Matière Vivante",
-    "Flux Continu",
-    "Saison Courte",
-    "Instant Brut"
-  ];
+  "Temps Lent",
+  "Juste Mesure",
+  "Saison Courte",
+  "Équilibre",
+  "Point d’Arrêt"
+];
 
   // 4️⃣ VARIANTES / ÉDITIONS
-  const editions = [
-    "— Série Courte",
-    "— Variation",
-    "— Batch Unique",
-    "— Édition Limitée"
-  ];
+ const editions = [
+  "— Série Courte",
+  "— Variation",
+  "— Lot Unique"
+];
 
   let name = "";
   const roll = Math.random();
