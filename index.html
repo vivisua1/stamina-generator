@@ -56,11 +56,23 @@ const articles = ["La", "Le", "L'"];
 
     // STRUCTURE B : Article + Nom bière + Adjectif
     else {
-      const article = articles[Math.floor(Math.random() * articles.length)];
-      const noun = beerNouns[Math.floor(Math.random() * beerNouns.length)];
-      const adjective = adjectives[Math.floor(Math.random() * adjectives.length)];
-      name = article + " " + noun + " " + adjective;
-    }
+
+  const slowAdjectives = ["Lent", "Calme", "Brut", "Simple"];
+
+  const article = articles[Math.floor(Math.random() * articles.length)];
+  const noun = beerNouns[Math.floor(Math.random() * beerNouns.length)];
+
+  let adjective;
+
+  if (noun === "Fermentation" || noun === "Brassin") {
+    adjective = slowAdjectives[Math.floor(Math.random() * slowAdjectives.length)];
+  } else {
+    adjective = adjectives[Math.floor(Math.random() * adjectives.length)];
+  }
+
+  name = article + " " + noun + " " + adjective;
+}
+``
 
     document.getElementById("result").textContent = name;
   }
