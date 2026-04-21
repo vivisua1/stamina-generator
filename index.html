@@ -4,13 +4,12 @@
   <meta charset="UTF-8">
   <title>STAMINA — Générateur de nom de bière</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="preconnectpis.com
-<link rel="preconnect" href="httpsef="https://fonts.googleapis.com/css2?family=Inter:wght
-  <style>
-    body {
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.comf="https://fonts.gstatic.com"oogleapis.com/css2?family=Inter:wght@400;500;600&display=swap" relody {
       margin: 0;
       padding: 0;
-     font-family: 'Inter', Helvetica,
+      font-family: 'Inter', Helvetica, Arial, sans-serif;
       background-color: #fafaf7;
       color: #222;
       display: flex;
@@ -19,50 +18,57 @@
       min-height: 100vh;
     }
 
-   .container {
-  text-align: center;
-  max-width: 440px;
-  padding: 40px 32px;
-}
+    .container {
+      text-align: center;
+      max-width: 440px;
+      padding: 40px 32px;
+    }
 
     .brand {
-  font-size: 13px;
-  color: #7a5c3e;
-  margin-bottom: 48px;
-  line-height: 1.4;
-}
+      font-size: 13px;
+      color: #7a5c3e;
+      margin-bottom: 48px;
+      line-height: 1.4;
+    }
 
-  h1 {
-  font-size: 28px;
-  font-weight: 500;
-  line-height: 1.15;
-  margin-bottom: 40px;
-}
+    .intro {
+      font-size: 14px;
+      color: #444;
+      max-width: 360px;
+      margin: 0 auto 24px auto;
+      line-height: 1.5;
+    }
 
+    h1 {
+      font-size: 28px;
+      font-weight: 500;
+      line-height: 1.15;
+      margin-bottom: 40px;
+    }
 
-  button {
-  background-color: #5e7f68;
-  color: #fff;
-  border: none;
-  padding: 14px 32px;
-  font-size: 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: opacity 0.2s ease;
-}
+    button {
+      background-color: #5e7f68;
+      color: #fff;
+      border: none;
+      padding: 14px 32px;
+      font-size: 15px;
+      font-weight: 500;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
 
     button:hover {
       opacity: 0.9;
     }
 
-  #result {
-  font-size: 36px;
-  font-weight: 600;
-  margin-top: 56px;
-  letter-spacing: 0.03em;
-  transition: opacity 0.2s ease;
-}
+    #result {
+      font-size: 36px;
+      font-weight: 600;
+      margin-top: 56px;
+      letter-spacing: 0.03em;
+      transition: opacity 0.2s ease;
+    }
 
     .separator {
       width: 40px;
@@ -72,123 +78,92 @@
     }
 
     .footer {
-  font-size: 11px;
-  color: #7a5c3e;
-  margin-top: 48px;
-}
-    
-.intro {
-  font-size: 14px;
-  color: #444;
-  max-width: 360px;
-  margin: 0 auto 24px auto;
-  line-height: 1.5;
-}
-
+      font-size: 11px;
+      color: #7a5c3e;
+      margin-top: 48px;
+    }
   </style>
-
 </head>
 
 <body>
 
-<div class="container">
+  <div class="container">
 
-  <div class="brand">
-    <strong>STAMINA</strong><br>
-    micro-brasserie artisanale
+    <div class="brand">
+      <strong>STAMINA</strong><br>
+      micro-brasserie artisanale<br>
+      —
+    </div>
+
+    <p class="intro">
+      Un outil STAMINA pour explorer le langage de la brasserie.
+    </p>
+
+    <h1>
+      Génère<br>
+      ton nom<br>
+      de bière
+    </h1>
+
+    <button onclick="generateName()">Générer</button>
+
+    <div id="result">—</div>
+    <div class="separator"></div>
+
+    <div class="footer">
+      Un nom, un choix — STAMINA
+    </div>
+
   </div>
-<p class="intro">
-  Un outil STAMINA pour explorer le langage de la brasserie.
-</p>
 
-  <h1>
-    Génère<br>
-    ton nom<br>
-    de bière
-  </h1>
+  <script>
+    function generateName() {
 
-  <button onclick="generateName()">Générer</button>
+      const abstract = [
+        "La Brume",
+        "Le Silence",
+        "La Lueur",
+        "L'Instant",
+        "L'Horizon",
+        "La Saison",
+        "La Matière",
+        "La Ligne"
+      ];
 
-  <div id="result">—</div>
-  <div class="separator"></div>
+      const material = [
+        ["Le Malt", ["Clair", "Mat", "Simple", "Juste"]],
+        ["La Fermentation", ["Lente", "Calme", "Maîtrisée"]],
+        ["Le Houblon", ["Sec", "Net", "Précis"]],
+        ["Le Brassin", ["Lent", "Soigné"]],
+        ["La Capsule", ["Sobre", "Claire"]],
+        ["La Cuve", ["Ouverte", "Stabilisée"]]
+      ];
 
-<div class="footer">
-  Un nom, un choix — STAMINA
-</div>
+      const editions = [
+        "— Série Courte",
+        "— Variation",
+        "— Lot Unique"
+      ];
 
-</div>
+      let name = "";
+      const roll = Math.random();
 
-<script>
-function generateName() {
+      if (roll < 0.45) {
+        name = abstract[Math.floor(Math.random() * abstract.length)];
+      } else if (roll < 0.85) {
+        const base = material[Math.floor(Math.random() * material.length)];
+        const adjective = base[1][Math.floor(Math.random() * base[1].length)];
+        name = base[0] + " " + adjective;
+      } else {
+        const base = abstract[Math.floor(Math.random() * abstract.length)];
+        const edition = editions[Math.floor(Math.random() * editions.length)];
+        name = base + " " + edition;
+      }
 
-  // 1️⃣ NOMS ABSTRAITS FORTS
-const abstract = [
-  "La Brume",
-  "Le Silence",
-  "La Lueur",
-  "L’Instant",
-  "L’Horizon",
-  "La Saison",
-  "La Matière",
-  "La Ligne"
-];
-
-  // 2️⃣ STRUCTURES MATIÈRE (nom + adjectif cohérent)
-  const material = [
-  ["Le Malt", ["Clair", "Mat", "Simple", "Juste"]],
-  ["La Fermentation", ["Lente", "Calme", "Maîtrisée"]],
-  ["Le Houblon", ["Sec", "Net", "Précis"]],
-  ["Le Brassin", ["Lent", "Soigné"]],
-  ["La Capsule", ["Sobre", "Claire"]],
-  ["La Cuve", ["Ouverte", "Stabilisée"]]
-];
-
-  // 3️⃣ STRUCTURES TEMPS / SENSATION
-  const temporal = [
-  "Temps Lent",
-  "Juste Mesure",
-  "Saison Courte",
-  "Équilibre",
-  "Point d’Arrêt"
-];
-
-  // 4️⃣ VARIANTES / ÉDITIONS
- const editions = [
-  "— Série Courte",
-  "— Variation",
-  "— Lot Unique"
-];
-
-  let name = "";
-  const roll = Math.random();
-
-  // STRUCTURE A — Nom abstrait seul
-  if (roll < 0.4) {
-    name = abstract[Math.floor(Math.random() * abstract.length)];
-  }
-
-  // STRUCTURE B — Matière + adjectif
-  else if (roll < 0.75) {
-    const base = material[Math.floor(Math.random() * material.length)];
-    const adjective = base[1][Math.floor(Math.random() * base[1].length)];
-    name = base[0] + " " + adjective;
-  }
-
-  // STRUCTURE C — Abstrait + variation
-  else if (roll < 0.9) {
-    const base = abstract[Math.floor(Math.random() * abstract.length)];
-    const edition = editions[Math.floor(Math.random() * editions.length)];
-    name = base + " " + edition;
-  }
-
-  // STRUCTURE D — Nom manifeste très rare
-  else {
-    name = temporal[Math.floor(Math.random() * temporal.length)];
-  }
-
-  document.getElementById("result").textContent = name;
-}
-</script>
+      document.getElementById("result").textContent = name;
+    }
+  </script>
 
 </body>
 </html>
+``
