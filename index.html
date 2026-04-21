@@ -16,12 +16,55 @@
       de bière
     </h1>
 
-    <button>Générer</button>
+    <button onclick="generateName()">Générer</button>
 
-    <p>—</p>
+    <p id="result">—</p>
 
     <p>Une création de STAMINA, micro-brasserie artisanale.</p>
   </div>
+<script>
+  function generateName() {
 
+    const articles = ["La", "Le", "L’"];
+
+    const adjectives = [
+      "Clair", "Doux", "Brut", "Lent", "Pur", "Libre", "Fin",
+      "Juste", "Calme", "Nu", "Dense", "Vif", "Léger", "Mat", "Simple"
+    ];
+
+    const beerNouns = [
+      "Malt", "Houblon", "Brassin",
+      "Fermentation", "Pression", "Capsule", "Cuve", "Bière"
+    ];
+
+    const abstractNouns = [
+      "Brume", "Flux", "Lueur", "Ligne", "Onde",
+      "Saison", "Matière", "Silence", "Instant", "Horizon"
+    ];
+
+    // Choix aléatoire de la structure
+    const structure = Math.random();
+
+    let name = "";
+
+    // STRUCTURE A : Article + Nom abstrait
+    if (structure < 0.45) {
+      const article = articles[Math.floor(Math.random() * articles.length)];
+      const noun = abstractNouns[Math.floor(Math.random() * abstractNouns.length)];
+      name = article + " " + noun;
+    }
+
+    // STRUCTURE B : Article + Nom bière + Adjectif
+    else {
+      const article = articles[Math.floor(Math.random() * articles.length)];
+      const noun = beerNouns[Math.floor(Math.random() * beerNouns.length)];
+      const adjective = adjectives[Math.floor(Math.random() * adjectives.length)];
+      name = article + " " + noun + " " + adjective;
+    }
+
+    document.getElementById("result").textContent = name;
+  }
+</script>
+``
 </body>
 </html>
