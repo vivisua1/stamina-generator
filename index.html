@@ -1,64 +1,39 @@
 <script>
 function generateName() {
 
-  // STRUCTURE A — Noms abstraits seuls (forte identité)
-  const abstractNouns = [
-    { article: "La", word: "Brume" },
-    { article: "Le", word: "Silence" },
-    { article: "La", word: "Lueur" },
-    { article: "L’", word: "Instant" },
-    { article: "L’", word: "Horizon" },
-    { article: "La", word: "Saison" }
+  // STRUCTURE A — Noms abstraits (SEULS)
+  const abstractNames = [
+    "La Brume",
+    "Le Silence",
+    "La Lueur",
+    "L’Instant",
+    "L’Horizon",
+    "La Saison"
   ];
 
-  // STRUCTURE B — Noms bière + adjectifs autorisés
-  const beerNouns = [
-    {
-      article: "Le",
-      word: "Malt",
-      adjectives: ["Clair", "Mat", "Pur", "Simple"]
-    },
-    {
-      article: "La",
-      word: "Fermentation",
-      adjectives: ["Lente", "Calme", "Brute"]
-    },
-    {
-      article: "Le",
-      word: "Houblon",
-      adjectives: ["Brut", "Vif", "Libre"]
-    },
-    {
-      article: "Le",
-      word: "Brassin",
-      adjectives: ["Simple", "Lent"]
-    },
-    {
-      article: "La",
-      word: "Capsule",
-      adjectives: ["Pure", "Claire"]
-    }
+  // STRUCTURE B — Noms bière (verrouillés et cohérents)
+  const beerNames = [
+    "Le Malt Clair",
+    "Le Malt Mat",
+    "Le Malt Simple",
+    "La Fermentation Lente",
+    "La Fermentation Calme",
+    "Le Houblon Brut",
+    "Le Houblon Libre",
+    "Le Brassin Lent",
+    "La Capsule Pure",
+    "La Capsule Claire"
   ];
 
   let name = "";
 
-  // Tirage de la structure
   if (Math.random() < 0.5) {
-    // STRUCTURE A
-    const picked =
-      abstractNouns[Math.floor(Math.random() * abstractNouns.length)];
-    name = picked.article + " " + picked.word;
-
+    name = abstractNames[Math.floor(Math.random() * abstractNames.length)];
   } else {
-    // STRUCTURE B
-    const beer =
-      beerNouns[Math.floor(Math.random() * beerNouns.length)];
-    const adjective =
-      beer.adjectives[Math.floor(Math.random() * beer.adjectives.length)];
-
-    name = beer.article + " " + beer.word + " " + adjective;
+    name = beerNames[Math.floor(Math.random() * beerNames.length)];
   }
 
   document.getElementById("result").textContent = name;
 }
 </script>
+``
