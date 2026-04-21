@@ -2,10 +2,10 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>STAMINA — Générateur de nom de bière</title>
+  <title>Bricole Brassicole — Générateur de nom de bière</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- ✅ Google Font (CORRECT) -->
+  <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -103,6 +103,19 @@
       transition: background-color 0.6s ease;
     }
 
+    .brand {
+      font-size: 13px;
+      margin-bottom: 32px;
+      line-height: 1.5;
+    }
+
+    .intro {
+      font-size: 14px;
+      max-width: 420px;
+      margin: 0 auto 32px auto;
+      line-height: 1.6;
+    }
+
     h1 {
       font-size: 36px;
       font-weight: 600;
@@ -131,18 +144,17 @@
       margin: 18px auto 38px;
     }
 
+    .footer {
+      font-size: 12px;
+      margin-top: 48px;
+    }
+
     /* ================= JOUR ================= */
     body.theme-day {
       color: #1f1f1f;
       background: linear-gradient(180deg,#f5f1e6,#e8d8a8,#c7d7c5);
       background-size: 100% 300%;
       animation: bgDay 50s ease-in-out infinite;
-    }
-
-    @keyframes bgDay {
-      0%{background-position:50% 0%}
-      50%{background-position:50% 100%}
-      100%{background-position:50% 0%}
     }
 
     body.theme-day .container {
@@ -170,12 +182,6 @@
       animation: bgNight 60s ease-in-out infinite;
     }
 
-    @keyframes bgNight {
-      0%{background-position:50% 0%}
-      50%{background-position:50% 100%}
-      100%{background-position:50% 0%}
-    }
-
     body.theme-night .container {
       background: rgba(25,23,18,0.72);
     }
@@ -198,7 +204,9 @@
 <body class="theme-day">
 
   <!-- SWITCH -->
-  <div class="theme-switch" onclick="toggleTheme()">Jour<div class="switch"></div>Soir</div>
+  <div class="theme-switch" onclick="toggleTheme()">
+    Jour <div class="switch"></div> Soir
+  </div>
 
   <!-- BULLES -->
   <div class="bubbles" id="bubbles">
@@ -209,10 +217,28 @@
 
   <!-- CONTENU -->
   <div class="container">
+
+    <div class="brand">
+      <strong>Bricole Brassicole</strong><br>
+      micro‑brasserie artisanale<br>
+      —
+    </div>
+
+    <p class="intro">
+      Un outil Bricole Brassicole pour explorer le langage de la brasserie.
+    </p>
+
     <h1>Génère ton nom de bière</h1>
+
     <button onclick="generateName()">Générer</button>
+
     <div id="result">—</div>
     <div class="separator"></div>
+
+    <div class="footer">
+      Un nom, un choix — Bricole Brassicole
+    </div>
+
   </div>
 
   <script>
@@ -222,8 +248,16 @@
     }
 
     function generateName(){
-      const names=["La Brume","Le Silence","Le Malt Clair","La Fermentation Lente","Le Houblon Précis"];
-      document.getElementById("result").textContent=names[Math.floor(Math.random()*names.length)];
+      const names=[
+        "La Brume",
+        "Le Silence",
+        "Le Malt Clair",
+        "La Fermentation Lente",
+        "Le Houblon Précis"
+      ];
+      document.getElementById("result").textContent =
+        names[Math.floor(Math.random()*names.length)];
+
       const bubbles=document.getElementById("bubbles");
       bubbles.classList.add("boost");
       setTimeout(()=>bubbles.classList.remove("boost"),900);
