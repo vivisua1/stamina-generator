@@ -1,82 +1,64 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <title>STAMINA — Générateur de nom de bière</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-
-  <div>
-    <p>STAMINA<br>micro-brasserie artisanale</p>
-
-    <h1>
-      Génère<br>
-      ton nom<br>
-      de bière
-    </h1>
-
-    <button onclick="generateName()">Générer</button>
-
-    <p id="result">—</p>
-
-    <p>Une création de STAMINA, micro-brasserie artisanale.</p>
-  </div>
 <script>
-  function generateName() {
+function generateName() {
 
-const articles = ["La", "Le", "L'"];
+  // STRUCTURE A — Noms abstraits seuls (forte identité)
+  const abstractNouns = [
+    { article: "La", word: "Brume" },
+    { article: "Le", word: "Silence" },
+    { article: "La", word: "Lueur" },
+    { article: "L’", word: "Instant" },
+    { article: "L’", word: "Horizon" },
+    { article: "La", word: "Saison" }
+  ];
 
-    const adjectives = [
-      "Clair", "Doux", "Brut", "Lent", "Pur", "Libre", "Fin",
-      "Juste", "Calme", "Nu", "Dense", "Vif", "Léger", "Mat", "Simple"
-    ];
-
-    const beerNouns = [
-      "Malt", "Houblon", "Brassin",
-      "Fermentation", "Pression", "Capsule", "Cuve", "Bière"
-    ];
-
-    const abstractNouns = [
-      "Brume", "Flux", "Lueur", "Ligne", "Onde",
-      "Saison", "Matière", "Silence", "Instant", "Horizon"
-    ];
-
-    // Choix aléatoire de la structure
-    const structure = Math.random();
-
-    let name = "";
-
-    // STRUCTURE A : Article + Nom abstrait
-    if (structure < 0.45) {
-      const article = articles[Math.floor(Math.random() * articles.length)];
-      const noun = abstractNouns[Math.floor(Math.random() * abstractNouns.length)];
-      name = article + " " + noun;
+  // STRUCTURE B — Noms bière + adjectifs autorisés
+  const beerNouns = [
+    {
+      article: "Le",
+      word: "Malt",
+      adjectives: ["Clair", "Mat", "Pur", "Simple"]
+    },
+    {
+      article: "La",
+      word: "Fermentation",
+      adjectives: ["Lente", "Calme", "Brute"]
+    },
+    {
+      article: "Le",
+      word: "Houblon",
+      adjectives: ["Brut", "Vif", "Libre"]
+    },
+    {
+      article: "Le",
+      word: "Brassin",
+      adjectives: ["Simple", "Lent"]
+    },
+    {
+      article: "La",
+      word: "Capsule",
+      adjectives: ["Pure", "Claire"]
     }
+  ];
 
-    // STRUCTURE B : Article + Nom bière + Adjectif
-    else {
+  let name = "";
 
-  const slowAdjectives = ["Lent", "Calme", "Brut", "Simple"];
+  // Tirage de la structure
+  if (Math.random() < 0.5) {
+    // STRUCTURE A
+    const picked =
+      abstractNouns[Math.floor(Math.random() * abstractNouns.length)];
+    name = picked.article + " " + picked.word;
 
-  const article = articles[Math.floor(Math.random() * articles.length)];
-  const noun = beerNouns[Math.floor(Math.random() * beerNouns.length)];
-
-  let adjective;
-
-  if (noun === "Fermentation" || noun === "Brassin") {
-    adjective = slowAdjectives[Math.floor(Math.random() * slowAdjectives.length)];
   } else {
-    adjective = adjectives[Math.floor(Math.random() * adjectives.length)];
+    // STRUCTURE B
+    const beer =
+      beerNouns[Math.floor(Math.random() * beerNouns.length)];
+    const adjective =
+      beer.adjectives[Math.floor(Math.random() * beer.adjectives.length)];
+
+    name = beer.article + " " + beer.word + " " + adjective;
   }
 
-  name = article + " " + noun + " " + adjective;
+  document.getElementById("result").textContent = name;
 }
-``
-
-    document.getElementById("result").textContent = name;
-  }
 </script>
-``
-</body>
-</html>
