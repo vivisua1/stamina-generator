@@ -5,13 +5,12 @@
   <title>Bricole Brassicole — Générateur de nom de bière</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Google Font -->
-  https://fonts.googleapis.com
-  https://fonts.gstatic.com
-  https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap
+  <!-- ✅ GOOGLE FONT (CORRECT) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
-    /* ===== BASE ===== */
     body {
       margin: 0;
       font-family: 'Inter', Helvetica, Arial, sans-serif;
@@ -177,36 +176,21 @@
     body.theme-night .bubble {
       background: radial-gradient(circle at 30% 30%,rgba(255,220,150,0.9),rgba(210,150,60,0.35) 60%,rgba(120,70,20,0.15));
     }
-
-    @keyframes bgDay {
-      0%{background-position:50% 0%}
-      50%{background-position:50% 100%}
-      100%{background-position:50% 0%}
-    }
-
-    @keyframes bgNight {
-      0%{background-position:50% 0%}
-      50%{background-position:50% 100%}
-      100%{background-position:50% 0%}
-    }
   </style>
 </head>
 
 <body class="theme-day">
 
-  <!-- SWITCH -->
   <div class="theme-switch" onclick="toggleTheme()">
     Jour <div class="switch"></div> Soir
   </div>
 
-  <!-- BULLES -->
   <div class="bubbles" id="bubbles">
     <div class="bubble" style="left:15%;width:40px;height:40px;--duration:30s;--drift:-30px;animation-duration:30s"></div>
     <div class="bubble" style="left:45%;width:70px;height:70px;--duration:46s;--drift:50px;animation-duration:46s"></div>
     <div class="bubble" style="left:75%;width:50px;height:50px;--duration:38s;--drift:-40px;animation-duration:38s"></div>
   </div>
 
-  <!-- CONTENU -->
   <div class="container">
     <div class="brand">
       <strong>Bricole Brassicole</strong><br>
@@ -236,24 +220,31 @@
       document.body.classList.toggle("theme-day");
     }
 
-    /* ===== GÉNÉRATEUR ROBUSTE ===== */
-
-    const articles = ["La", "Le"];
+    /* ===== BASES AVEC GENRE ===== */
     const bases = [
-      "Brume","Silence","Malt","Houblon","Fermentation","Brassin",
-      "Cuve","Matière","Lueur","Saison","Levure","Grain"
+      { article: "La", word: "Brume" },
+      { article: "Le", word: "Silence" },
+      { article: "Le", word: "Malt" },
+      { article: "Le", word: "Houblon" },
+      { article: "La", word: "Fermentation" },
+      { article: "Le", word: "Brassin" },
+      { article: "La", word: "Cuve" },
+      { article: "La", word: "Levure" },
+      { article: "La", word: "Matière" },
+      { article: "La", word: "Saison" },
+      { article: "Le", word: "Grain" },
+      { article: "La", word: "Lueur" }
     ];
 
     const qualifiers = [
       "Clair","Sombre","Lent","Vif","Calme","Brut","Précis",
-      "Sauvage","Doux","Mat","Vivant","Sec","Juste","Libre"
+      "Doux","Mat","Sec","Juste","Libre","Sauvage","Franc"
     ];
 
     const suffixes = [
       "", "", "",
-      "du Soir",
       "de Saison",
-      "du Brassage",
+      "du Soir",
       "— Série Courte",
       "— Lot Unique"
     ];
@@ -262,21 +253,17 @@
     const recentNames = [];
 
     function generateName() {
-      let name = "";
-      let attempts = 0;
+      let name;
+      let tries = 0;
 
       do {
-        const article = articles[Math.floor(Math.random() * articles.length)];
         const base = bases[Math.floor(Math.random() * bases.length)];
         const qualifier = qualifiers[Math.floor(Math.random() * qualifiers.length)];
         const suffix = suffixes[Math.floor(Math.random() * suffixes.length)];
 
-        name = `${article} ${base} ${qualifier} ${suffix}`.replace(/\s+/g," ").trim();
-        attempts++;
-      } while (
-        (name === lastName || recentNames.includes(name)) &&
-        attempts < 50
-      );
+        name = `${base.article} ${base.word} ${qualifier} ${suffix}`.replace(/\s+/g, " ").trim();
+        tries++;
+      } while ((name === lastName || recentNames.includes(name)) && tries < 50);
 
       lastName = name;
       recentNames.push(name);
