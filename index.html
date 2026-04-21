@@ -6,24 +6,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Google Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  https://fonts.googleapis.com
+  https://fonts.gstatic.com
+  https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap
 
   <style>
-    /* ================= BASE ================= */
+    /* ===== BASE ===== */
     body {
       margin: 0;
       font-family: 'Inter', Helvetica, Arial, sans-serif;
       min-height: 100vh;
       overflow: hidden;
-      transition: background 0.6s ease, color 0.6s ease;
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: background 0.6s ease, color 0.6s ease;
     }
 
-    /* ================= SWITCH ================= */
+    /* ===== SWITCH ===== */
     .theme-switch {
       position: fixed;
       top: 20px;
@@ -65,7 +65,7 @@
       transform: translateX(20px);
     }
 
-    /* ================= BULLES ================= */
+    /* ===== BULLES ===== */
     .bubbles {
       position: absolute;
       inset: 0;
@@ -83,14 +83,14 @@
 
     @keyframes rise {
       from { transform: translate(0,0) scale(0.9); }
-      to { transform: translate(var(--drift), -140vh) scale(1.1); }
+      to   { transform: translate(var(--drift), -140vh) scale(1.1); }
     }
 
     .bubbles.boost .bubble {
       animation-duration: calc(var(--duration) * 0.6);
     }
 
-    /* ================= CARTE ================= */
+    /* ===== CARTE ===== */
     .container {
       position: relative;
       z-index: 2;
@@ -100,7 +100,6 @@
       padding: 72px 56px;
       border-radius: 18px;
       backdrop-filter: blur(10px);
-      transition: background-color 0.6s ease;
     }
 
     .brand {
@@ -149,7 +148,7 @@
       margin-top: 48px;
     }
 
-    /* ================= JOUR ================= */
+    /* ===== JOUR ===== */
     body.theme-day {
       color: #1f1f1f;
       background: linear-gradient(180deg,#f5f1e6,#e8d8a8,#c7d7c5);
@@ -157,24 +156,14 @@
       animation: bgDay 50s ease-in-out infinite;
     }
 
-    body.theme-day .container {
-      background: rgba(255,255,255,0.65);
-    }
-
-    body.theme-day button {
-      background: #4f6f5a;
-      color: #fff;
-    }
-
-    body.theme-day .separator {
-      background: #d9a93a;
-    }
-
+    body.theme-day .container { background: rgba(255,255,255,0.65); }
+    body.theme-day button { background: #4f6f5a; color: #fff; }
+    body.theme-day .separator { background: #d9a93a; }
     body.theme-day .bubble {
       background: radial-gradient(circle at 30% 30%,rgba(255,255,255,0.9),rgba(255,255,255,0.2) 60%,rgba(255,255,255,0.05));
     }
 
-    /* ================= SOIR ================= */
+    /* ===== SOIR ===== */
     body.theme-night {
       color: #f2efe9;
       background: linear-gradient(180deg,#1b1a17,#2a241b,#3a2f1d);
@@ -182,21 +171,23 @@
       animation: bgNight 60s ease-in-out infinite;
     }
 
-    body.theme-night .container {
-      background: rgba(25,23,18,0.72);
-    }
-
-    body.theme-night button {
-      background: #c8923a;
-      color: #1b1a17;
-    }
-
-    body.theme-night .separator {
-      background: #d9a93a;
-    }
-
+    body.theme-night .container { background: rgba(25,23,18,0.72); }
+    body.theme-night button { background: #c8923a; color: #1b1a17; }
+    body.theme-night .separator { background: #d9a93a; }
     body.theme-night .bubble {
       background: radial-gradient(circle at 30% 30%,rgba(255,220,150,0.9),rgba(210,150,60,0.35) 60%,rgba(120,70,20,0.15));
+    }
+
+    @keyframes bgDay {
+      0%{background-position:50% 0%}
+      50%{background-position:50% 100%}
+      100%{background-position:50% 0%}
+    }
+
+    @keyframes bgNight {
+      0%{background-position:50% 0%}
+      50%{background-position:50% 100%}
+      100%{background-position:50% 0%}
     }
   </style>
 </head>
@@ -217,7 +208,6 @@
 
   <!-- CONTENU -->
   <div class="container">
-
     <div class="brand">
       <strong>Bricole Brassicole</strong><br>
       micro‑brasserie artisanale<br>
@@ -238,29 +228,65 @@
     <div class="footer">
       Un nom, un choix — Bricole Brassicole
     </div>
-
   </div>
 
   <script>
-    function toggleTheme(){
+    function toggleTheme() {
       document.body.classList.toggle("theme-night");
       document.body.classList.toggle("theme-day");
     }
 
-    function generateName(){
-      const names=[
-        "La Brume",
-        "Le Silence",
-        "Le Malt Clair",
-        "La Fermentation Lente",
-        "Le Houblon Précis"
-      ];
-      document.getElementById("result").textContent =
-        names[Math.floor(Math.random()*names.length)];
+    /* ===== GÉNÉRATEUR ROBUSTE ===== */
 
-      const bubbles=document.getElementById("bubbles");
+    const articles = ["La", "Le"];
+    const bases = [
+      "Brume","Silence","Malt","Houblon","Fermentation","Brassin",
+      "Cuve","Matière","Lueur","Saison","Levure","Grain"
+    ];
+
+    const qualifiers = [
+      "Clair","Sombre","Lent","Vif","Calme","Brut","Précis",
+      "Sauvage","Doux","Mat","Vivant","Sec","Juste","Libre"
+    ];
+
+    const suffixes = [
+      "", "", "",
+      "du Soir",
+      "de Saison",
+      "du Brassage",
+      "— Série Courte",
+      "— Lot Unique"
+    ];
+
+    let lastName = null;
+    const recentNames = [];
+
+    function generateName() {
+      let name = "";
+      let attempts = 0;
+
+      do {
+        const article = articles[Math.floor(Math.random() * articles.length)];
+        const base = bases[Math.floor(Math.random() * bases.length)];
+        const qualifier = qualifiers[Math.floor(Math.random() * qualifiers.length)];
+        const suffix = suffixes[Math.floor(Math.random() * suffixes.length)];
+
+        name = `${article} ${base} ${qualifier} ${suffix}`.replace(/\s+/g," ").trim();
+        attempts++;
+      } while (
+        (name === lastName || recentNames.includes(name)) &&
+        attempts < 50
+      );
+
+      lastName = name;
+      recentNames.push(name);
+      if (recentNames.length > 20) recentNames.shift();
+
+      document.getElementById("result").textContent = name;
+
+      const bubbles = document.getElementById("bubbles");
       bubbles.classList.add("boost");
-      setTimeout(()=>bubbles.classList.remove("boost"),900);
+      setTimeout(() => bubbles.classList.remove("boost"), 900);
     }
   </script>
 
