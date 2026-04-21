@@ -5,18 +5,15 @@
   <title>STAMINA — Générateur de nom de bière</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Google Font -->
-  https://fonts.googleapis.com
-  https://fonts.gstatic.com
-  https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap
+  <!-- ✅ Google Font (CORRECT) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
-    /* =====================================================
-       BASE
-       ===================================================== */
+    /* ================= BASE ================= */
     body {
       margin: 0;
-      padding: 0;
       font-family: 'Inter', Helvetica, Arial, sans-serif;
       min-height: 100vh;
       overflow: hidden;
@@ -26,9 +23,7 @@
       justify-content: center;
     }
 
-    /* =====================================================
-       SWITCH JOUR / SOIR
-       ===================================================== */
+    /* ================= SWITCH ================= */
     .theme-switch {
       position: fixed;
       top: 20px;
@@ -48,7 +43,6 @@
       background: #ccc;
       border-radius: 22px;
       position: relative;
-      transition: background 0.3s ease;
     }
 
     .switch::after {
@@ -71,9 +65,7 @@
       transform: translateX(20px);
     }
 
-    /* =====================================================
-       BULLES
-       ===================================================== */
+    /* ================= BULLES ================= */
     .bubbles {
       position: absolute;
       inset: 0;
@@ -90,21 +82,15 @@
     }
 
     @keyframes rise {
-      from {
-        transform: translate(0, 0) scale(0.9);
-      }
-      to {
-        transform: translate(var(--drift), -140vh) scale(1.1);
-      }
+      from { transform: translate(0,0) scale(0.9); }
+      to { transform: translate(var(--drift), -140vh) scale(1.1); }
     }
 
     .bubbles.boost .bubble {
       animation-duration: calc(var(--duration) * 0.6);
     }
 
-    /* =====================================================
-       CARTE
-       ===================================================== */
+    /* ================= CARTE ================= */
     .container {
       position: relative;
       z-index: 2;
@@ -114,25 +100,13 @@
       padding: 72px 56px;
       border-radius: 18px;
       backdrop-filter: blur(10px);
-      transition: background-color 0.6s ease, box-shadow 0.6s ease;
-    }
-
-    .brand {
-      font-size: 13px;
-      margin-bottom: 40px;
-    }
-
-    .intro {
-      font-size: 15px;
-      max-width: 440px;
-      margin: 0 auto 36px auto;
-      line-height: 1.6;
+      transition: background-color 0.6s ease;
     }
 
     h1 {
       font-size: 36px;
       font-weight: 600;
-      margin: 0 0 46px 0;
+      margin: 0 0 40px;
       white-space: nowrap;
     }
 
@@ -143,13 +117,11 @@
       font-weight: 600;
       border-radius: 10px;
       cursor: pointer;
-      transition: background-color 0.4s ease, color 0.4s ease;
     }
 
     #result {
       font-size: 40px;
-      font-weight: 600;
-      margin-top: 68px;
+      margin-top: 64px;
       letter-spacing: 0.05em;
     }
 
@@ -159,99 +131,66 @@
       margin: 18px auto 38px;
     }
 
-    .footer {
-      font-size: 12px;
-      margin-top: 58px;
-    }
-
-    /* =====================================================
-       THEME JOUR
-       ===================================================== */
+    /* ================= JOUR ================= */
     body.theme-day {
       color: #1f1f1f;
-      background: linear-gradient(180deg, #f5f1e6, #e8d8a8, #c7d7c5);
+      background: linear-gradient(180deg,#f5f1e6,#e8d8a8,#c7d7c5);
       background-size: 100% 300%;
       animation: bgDay 50s ease-in-out infinite;
     }
 
     @keyframes bgDay {
-      0% { background-position: 50% 0%; }
-      50% { background-position: 50% 100%; }
-      100% { background-position: 50% 0%; }
+      0%{background-position:50% 0%}
+      50%{background-position:50% 100%}
+      100%{background-position:50% 0%}
     }
 
     body.theme-day .container {
-      background-color: rgba(255,255,255,0.65);
-      box-shadow: 0 30px 80px rgba(0,0,0,0.12);
+      background: rgba(255,255,255,0.65);
     }
 
     body.theme-day button {
-      background-color: #4f6f5a;
+      background: #4f6f5a;
       color: #fff;
     }
 
     body.theme-day .separator {
-      background-color: #d9a93a;
+      background: #d9a93a;
     }
 
     body.theme-day .bubble {
-      background: radial-gradient(
-        circle at 30% 30%,
-        rgba(255,255,255,0.9),
-        rgba(255,255,255,0.2) 60%,
-        rgba(255,255,255,0.05)
-      );
-      opacity: 0.65;
+      background: radial-gradient(circle at 30% 30%,rgba(255,255,255,0.9),rgba(255,255,255,0.2) 60%,rgba(255,255,255,0.05));
     }
 
-    /* =====================================================
-       THEME SOIR
-       ===================================================== */
+    /* ================= SOIR ================= */
     body.theme-night {
       color: #f2efe9;
-      background: linear-gradient(180deg, #1b1a17, #2a241b, #3a2f1d);
+      background: linear-gradient(180deg,#1b1a17,#2a241b,#3a2f1d);
       background-size: 100% 300%;
       animation: bgNight 60s ease-in-out infinite;
     }
 
     @keyframes bgNight {
-      0% { background-position: 50% 0%; }
-      50% { background-position: 50% 100%; }
-      100% { background-position: 50% 0%; }
+      0%{background-position:50% 0%}
+      50%{background-position:50% 100%}
+      100%{background-position:50% 0%}
     }
 
     body.theme-night .container {
-      background-color: rgba(25,23,18,0.72);
-      box-shadow: 0 30px 90px rgba(0,0,0,0.55);
+      background: rgba(25,23,18,0.72);
     }
 
     body.theme-night button {
-      background-color: #c8923a;
+      background: #c8923a;
       color: #1b1a17;
     }
 
     body.theme-night .separator {
-      background-color: #d9a93a;
+      background: #d9a93a;
     }
 
     body.theme-night .bubble {
-      background: radial-gradient(
-        circle at 30% 30%,
-        rgba(255,220,150,0.9),
-        rgba(210,150,60,0.35) 60%,
-        rgba(120,70,20,0.15)
-      );
-      opacity: 0.75;
-    }
-
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 28px;
-        white-space: normal;
-      }
-      .container {
-        padding: 56px 32px;
-      }
+      background: radial-gradient(circle at 30% 30%,rgba(255,220,150,0.9),rgba(210,150,60,0.35) 60%,rgba(120,70,20,0.15));
     }
   </style>
 </head>
@@ -259,88 +198,35 @@
 <body class="theme-day">
 
   <!-- SWITCH -->
-  <div class="theme-switch" onclick="toggleTheme()">
-    Jour
-    <div class="switch"></div>
-    Soir
-  </div>
+  <div class="theme-switch" onclick="toggleTheme()">Jour<div class="switch"></div>Soir</div>
 
   <!-- BULLES -->
   <div class="bubbles" id="bubbles">
-    <div class="bubble" style="left:10%; width:36px; height:36px; --duration:30s; --drift:-40px; animation-duration:30s;"></div>
-    <div class="bubble" style="left:30%; width:60px; height:60px; --duration:42s; --drift:50px; animation-duration:42s;"></div>
-    <div class="bubble" style="left:50%; width:26px; height:26px; --duration:24s; --drift:-30px; animation-duration:24s;"></div>
-    <div class="bubble" style="left:70%; width:74px; height:74px; --duration:48s; --drift:60px; animation-duration:48s;"></div>
-    <div class="bubble" style="left:85%; width:44px; height:44px; --duration:36s; --drift:-25px; animation-duration:36s;"></div>
+    <div class="bubble" style="left:15%;width:40px;height:40px;--duration:30s;--drift:-30px;animation-duration:30s"></div>
+    <div class="bubble" style="left:45%;width:70px;height:70px;--duration:46s;--drift:50px;animation-duration:46s"></div>
+    <div class="bubble" style="left:75%;width:50px;height:50px;--duration:38s;--drift:-40px;animation-duration:38s"></div>
   </div>
 
   <!-- CONTENU -->
   <div class="container">
-    <div class="brand">
-      <strong>STAMINA</strong><br>
-      micro-brasserie artisanale<br>
-      —
-    </div>
-
-    <p class="intro">
-      Un outil STAMINA pour explorer le langage de la brasserie.
-    </p>
-
     <h1>Génère ton nom de bière</h1>
-
     <button onclick="generateName()">Générer</button>
-
     <div id="result">—</div>
     <div class="separator"></div>
-
-    <div class="footer">
-      Un nom, un choix — STAMINA
-    </div>
   </div>
 
   <script>
-    function toggleTheme() {
+    function toggleTheme(){
       document.body.classList.toggle("theme-night");
       document.body.classList.toggle("theme-day");
     }
 
-    function generateName() {
-      const abstract = [
-        "La Brume","Le Silence","La Lueur","L'Instant",
-        "L'Horizon","La Saison","La Matière","La Ligne"
-      ];
-
-      const material = [
-        ["Le Malt", ["Clair","Mat","Simple","Juste"]],
-        ["La Fermentation", ["Lente","Calme","Maîtrisée"]],
-        ["Le Houblon", ["Sec","Net","Précis"]],
-        ["Le Brassin", ["Lent","Soigné"]],
-        ["La Capsule", ["Sobre","Claire"]],
-        ["La Cuve", ["Ouverte","Stabilisée"]]
-      ];
-
-      const editions = ["— Série Courte","— Variation","— Lot Unique"];
-
-      let name = "";
-      const roll = Math.random();
-
-      if (roll < 0.45) {
-        name = abstract[Math.floor(Math.random() * abstract.length)];
-      } else if (roll < 0.85) {
-        const base = material[Math.floor(Math.random() * material.length)];
-        const adjective = base[1][Math.floor(Math.random() * base[1].length)];
-        name = base[0] + " " + adjective;
-      } else {
-        const base = abstract[Math.floor(Math.random() * abstract.length)];
-        const edition = editions[Math.floor(Math.random() * editions.length)];
-        name = base + " " + edition;
-      }
-
-      document.getElementById("result").textContent = name;
-
-      const bubbles = document.getElementById("bubbles");
+    function generateName(){
+      const names=["La Brume","Le Silence","Le Malt Clair","La Fermentation Lente","Le Houblon Précis"];
+      document.getElementById("result").textContent=names[Math.floor(Math.random()*names.length)];
+      const bubbles=document.getElementById("bubbles");
       bubbles.classList.add("boost");
-      setTimeout(() => bubbles.classList.remove("boost"), 900);
+      setTimeout(()=>bubbles.classList.remove("boost"),900);
     }
   </script>
 
