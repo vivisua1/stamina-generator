@@ -6,69 +6,87 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Google Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  https://fonts.googleapis.com
+  https://fonts.gstatic.com
+  https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap
 
   <style>
-    /* ===============================
-       FOND SOIR / BAR (CHAUD & SOMBRE)
-       =============================== */
+    /* =====================================================
+       BASE
+       ===================================================== */
     body {
       margin: 0;
       padding: 0;
       font-family: 'Inter', Helvetica, Arial, sans-serif;
-      color: #f2efe9;
       min-height: 100vh;
       overflow: hidden;
-
-      background: linear-gradient(
-        180deg,
-        #1b1a17 0%,
-        #2a241b 40%,
-        #3a2f1d 100%
-      );
-      background-size: 100% 300%;
-      animation: slowBackground 60s ease-in-out infinite;
-
+      transition: background 0.6s ease, color 0.6s ease;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    @keyframes slowBackground {
-      0%   { background-position: 50% 0%; }
-      50%  { background-position: 50% 100%; }
-      100% { background-position: 50% 0%; }
+    /* =====================================================
+       SWITCH JOUR / SOIR
+       ===================================================== */
+    .theme-switch {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      cursor: pointer;
+      user-select: none;
     }
 
-    /* ===============================
-       BULLES AMBRÉES (VISIBLE & ÉLÉGANT)
-       =============================== */
+    .switch {
+      width: 42px;
+      height: 22px;
+      background: #ccc;
+      border-radius: 22px;
+      position: relative;
+      transition: background 0.3s ease;
+    }
+
+    .switch::after {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 16px;
+      height: 16px;
+      background: white;
+      border-radius: 50%;
+      transition: transform 0.3s ease;
+    }
+
+    body.theme-night .switch {
+      background: #c8923a;
+    }
+
+    body.theme-night .switch::after {
+      transform: translateX(20px);
+    }
+
+    /* =====================================================
+       BULLES
+       ===================================================== */
     .bubbles {
       position: absolute;
       inset: 0;
-      z-index: 1;
       pointer-events: none;
       overflow: hidden;
+      z-index: 1;
     }
 
     .bubble {
       position: absolute;
       bottom: -200px;
       border-radius: 50%;
-      opacity: 0.75;
-
-      background: radial-gradient(
-        circle at 30% 30%,
-        rgba(255, 220, 150, 0.9),
-        rgba(210, 150, 60, 0.35) 60%,
-        rgba(120, 70, 20, 0.15)
-      );
-
-      animation-name: rise;
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
+      animation: rise linear infinite;
     }
 
     @keyframes rise {
@@ -80,64 +98,52 @@
       }
     }
 
-    /* Accélération subtile au clic */
     .bubbles.boost .bubble {
       animation-duration: calc(var(--duration) * 0.6);
     }
 
-    /* ===============================
-       CARTE CENTRALE (PREMIUM)
-       =============================== */
+    /* =====================================================
+       CARTE
+       ===================================================== */
     .container {
       position: relative;
       z-index: 2;
-
-      background-color: rgba(25, 23, 18, 0.72);
-      backdrop-filter: blur(8px);
-
       text-align: center;
       max-width: 560px;
       width: 100%;
-      padding: 76px 60px;
-
+      padding: 72px 56px;
       border-radius: 18px;
-      box-shadow: 0 30px 90px rgba(0,0,0,0.55);
+      backdrop-filter: blur(10px);
+      transition: background-color 0.6s ease, box-shadow 0.6s ease;
     }
 
     .brand {
       font-size: 13px;
-      color: #d6c49a;
-      line-height: 1.5;
-      margin-bottom: 42px;
+      margin-bottom: 40px;
     }
 
     .intro {
       font-size: 15px;
-      color: #e4dfd2;
       max-width: 440px;
       margin: 0 auto 36px auto;
       line-height: 1.6;
     }
 
-    /* TITRE SUR UNE SEULE LIGNE */
     h1 {
       font-size: 36px;
       font-weight: 600;
       margin: 0 0 46px 0;
       white-space: nowrap;
-      text-align: center;
-      color: #fff6dd;
     }
 
     button {
-      background-color: #c8923a;
-      color: #1b1a17;
       border: none;
       padding: 16px 46px;
       font-size: 16px;
       font-weight: 600;
       border-radius: 10px;
       cursor: pointer;
+      transition: background-color 0.4s ease, color 0.4s ease;
     }
 
     #result {
@@ -145,20 +151,97 @@
       font-weight: 600;
       margin-top: 68px;
       letter-spacing: 0.05em;
-      color: #ffe6b0;
     }
 
     .separator {
       width: 52px;
       height: 3px;
-      background-color: #d9a93a;
       margin: 18px auto 38px;
     }
 
     .footer {
       font-size: 12px;
-      color: #cbb88d;
       margin-top: 58px;
+    }
+
+    /* =====================================================
+       THEME JOUR
+       ===================================================== */
+    body.theme-day {
+      color: #1f1f1f;
+      background: linear-gradient(180deg, #f5f1e6, #e8d8a8, #c7d7c5);
+      background-size: 100% 300%;
+      animation: bgDay 50s ease-in-out infinite;
+    }
+
+    @keyframes bgDay {
+      0% { background-position: 50% 0%; }
+      50% { background-position: 50% 100%; }
+      100% { background-position: 50% 0%; }
+    }
+
+    body.theme-day .container {
+      background-color: rgba(255,255,255,0.65);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.12);
+    }
+
+    body.theme-day button {
+      background-color: #4f6f5a;
+      color: #fff;
+    }
+
+    body.theme-day .separator {
+      background-color: #d9a93a;
+    }
+
+    body.theme-day .bubble {
+      background: radial-gradient(
+        circle at 30% 30%,
+        rgba(255,255,255,0.9),
+        rgba(255,255,255,0.2) 60%,
+        rgba(255,255,255,0.05)
+      );
+      opacity: 0.65;
+    }
+
+    /* =====================================================
+       THEME SOIR
+       ===================================================== */
+    body.theme-night {
+      color: #f2efe9;
+      background: linear-gradient(180deg, #1b1a17, #2a241b, #3a2f1d);
+      background-size: 100% 300%;
+      animation: bgNight 60s ease-in-out infinite;
+    }
+
+    @keyframes bgNight {
+      0% { background-position: 50% 0%; }
+      50% { background-position: 50% 100%; }
+      100% { background-position: 50% 0%; }
+    }
+
+    body.theme-night .container {
+      background-color: rgba(25,23,18,0.72);
+      box-shadow: 0 30px 90px rgba(0,0,0,0.55);
+    }
+
+    body.theme-night button {
+      background-color: #c8923a;
+      color: #1b1a17;
+    }
+
+    body.theme-night .separator {
+      background-color: #d9a93a;
+    }
+
+    body.theme-night .bubble {
+      background: radial-gradient(
+        circle at 30% 30%,
+        rgba(255,220,150,0.9),
+        rgba(210,150,60,0.35) 60%,
+        rgba(120,70,20,0.15)
+      );
+      opacity: 0.75;
     }
 
     @media (max-width: 600px) {
@@ -173,21 +256,26 @@
   </style>
 </head>
 
-<body>
+<body class="theme-day">
+
+  <!-- SWITCH -->
+  <div class="theme-switch" onclick="toggleTheme()">
+    Jour
+    <div class="switch"></div>
+    Soir
+  </div>
 
   <!-- BULLES -->
   <div class="bubbles" id="bubbles">
-    <div class="bubble" style="left:8%;  width:32px; height:32px; --duration:26s; --drift:-30px; animation-duration:26s;"></div>
-    <div class="bubble" style="left:22%; width:56px; height:56px; --duration:36s; --drift:40px;  animation-duration:36s;"></div>
-    <div class="bubble" style="left:40%; width:24px; height:24px; --duration:22s; --drift:-20px; animation-duration:22s;"></div>
-    <div class="bubble" style="left:58%; width:72px; height:72px; --duration:44s; --drift:60px;  animation-duration:44s;"></div>
-    <div class="bubble" style="left:74%; width:38px; height:38px; --duration:30s; --drift:-35px; animation-duration:30s;"></div>
-    <div class="bubble" style="left:90%; width:50px; height:50px; --duration:40s; --drift:25px;  animation-duration:40s;"></div>
+    <div class="bubble" style="left:10%; width:36px; height:36px; --duration:30s; --drift:-40px; animation-duration:30s;"></div>
+    <div class="bubble" style="left:30%; width:60px; height:60px; --duration:42s; --drift:50px; animation-duration:42s;"></div>
+    <div class="bubble" style="left:50%; width:26px; height:26px; --duration:24s; --drift:-30px; animation-duration:24s;"></div>
+    <div class="bubble" style="left:70%; width:74px; height:74px; --duration:48s; --drift:60px; animation-duration:48s;"></div>
+    <div class="bubble" style="left:85%; width:44px; height:44px; --duration:36s; --drift:-25px; animation-duration:36s;"></div>
   </div>
 
   <!-- CONTENU -->
   <div class="container">
-
     <div class="brand">
       <strong>STAMINA</strong><br>
       micro-brasserie artisanale<br>
@@ -208,10 +296,14 @@
     <div class="footer">
       Un nom, un choix — STAMINA
     </div>
-
   </div>
 
   <script>
+    function toggleTheme() {
+      document.body.classList.toggle("theme-night");
+      document.body.classList.toggle("theme-day");
+    }
+
     function generateName() {
       const abstract = [
         "La Brume","Le Silence","La Lueur","L'Instant",
@@ -246,7 +338,6 @@
 
       document.getElementById("result").textContent = name;
 
-      /* Réaction subtile au clic */
       const bubbles = document.getElementById("bubbles");
       bubbles.classList.add("boost");
       setTimeout(() => bubbles.classList.remove("boost"), 900);
@@ -254,4 +345,4 @@
   </script>
 
 </body>
-</html
+</html>
