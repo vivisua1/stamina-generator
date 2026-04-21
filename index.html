@@ -5,31 +5,31 @@
   <title>STAMINA — Générateur de nom de bière</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Google Font (correctement chargé) -->
+  <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
     /* ===============================
-       FOND CONTRASTÉ ANIMÉ
+       FOND SOIR / BAR (CHAUD & SOMBRE)
        =============================== */
     body {
       margin: 0;
       padding: 0;
       font-family: 'Inter', Helvetica, Arial, sans-serif;
-      color: #1f1f1f;
+      color: #f2efe9;
       min-height: 100vh;
       overflow: hidden;
 
       background: linear-gradient(
         180deg,
-        #f5f1e6 0%,
-        #e8d8a8 45%,
-        #c7d7c5 100%
+        #1b1a17 0%,
+        #2a241b 40%,
+        #3a2f1d 100%
       );
       background-size: 100% 300%;
-      animation: slowBackground 50s ease-in-out infinite;
+      animation: slowBackground 60s ease-in-out infinite;
 
       display: flex;
       align-items: center;
@@ -37,13 +37,13 @@
     }
 
     @keyframes slowBackground {
-      0% { background-position: 50% 0%; }
-      50% { background-position: 50% 100%; }
+      0%   { background-position: 50% 0%; }
+      50%  { background-position: 50% 100%; }
       100% { background-position: 50% 0%; }
     }
 
     /* ===============================
-       BULLES (ORGANIQUES)
+       BULLES AMBRÉES (VISIBLE & ÉLÉGANT)
        =============================== */
     .bubbles {
       position: absolute;
@@ -57,19 +57,20 @@
       position: absolute;
       bottom: -200px;
       border-radius: 50%;
+      opacity: 0.75;
+
       background: radial-gradient(
         circle at 30% 30%,
-        rgba(255,255,255,0.9),
-        rgba(255,255,255,0.2) 60%,
-        rgba(255,255,255,0.05)
+        rgba(255, 220, 150, 0.9),
+        rgba(210, 150, 60, 0.35) 60%,
+        rgba(120, 70, 20, 0.15)
       );
-      opacity: 0.65;
+
       animation-name: rise;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
     }
 
-    /* Mouvement vertical + léger drift horizontal */
     @keyframes rise {
       from {
         transform: translate(0, 0) scale(0.9);
@@ -79,40 +80,40 @@
       }
     }
 
-    /* Accélération temporaire au clic */
+    /* Accélération subtile au clic */
     .bubbles.boost .bubble {
       animation-duration: calc(var(--duration) * 0.6);
     }
 
     /* ===============================
-       CARTE CENTRALE
+       CARTE CENTRALE (PREMIUM)
        =============================== */
     .container {
       position: relative;
       z-index: 2;
 
-      background-color: rgba(255, 255, 255, 0.65);
+      background-color: rgba(25, 23, 18, 0.72);
       backdrop-filter: blur(8px);
 
       text-align: center;
-      max-width: 540px;
+      max-width: 560px;
       width: 100%;
-      padding: 72px 56px;
+      padding: 76px 60px;
 
-      border-radius: 16px;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.12);
+      border-radius: 18px;
+      box-shadow: 0 30px 90px rgba(0,0,0,0.55);
     }
 
     .brand {
       font-size: 13px;
-      color: #5f4a2f;
+      color: #d6c49a;
       line-height: 1.5;
-      margin-bottom: 40px;
+      margin-bottom: 42px;
     }
 
     .intro {
       font-size: 15px;
-      color: #333;
+      color: #e4dfd2;
       max-width: 440px;
       margin: 0 auto 36px auto;
       line-height: 1.6;
@@ -122,40 +123,42 @@
     h1 {
       font-size: 36px;
       font-weight: 600;
-      margin: 0 0 44px 0;
+      margin: 0 0 46px 0;
       white-space: nowrap;
       text-align: center;
+      color: #fff6dd;
     }
 
     button {
-      background-color: #4f6f5a;
-      color: #fff;
+      background-color: #c8923a;
+      color: #1b1a17;
       border: none;
-      padding: 16px 44px;
+      padding: 16px 46px;
       font-size: 16px;
-      font-weight: 500;
-      border-radius: 8px;
+      font-weight: 600;
+      border-radius: 10px;
       cursor: pointer;
     }
 
     #result {
       font-size: 40px;
       font-weight: 600;
-      margin-top: 64px;
-      letter-spacing: 0.04em;
+      margin-top: 68px;
+      letter-spacing: 0.05em;
+      color: #ffe6b0;
     }
 
     .separator {
-      width: 48px;
+      width: 52px;
       height: 3px;
       background-color: #d9a93a;
-      margin: 18px auto 36px;
+      margin: 18px auto 38px;
     }
 
     .footer {
       font-size: 12px;
-      color: #5f4a2f;
-      margin-top: 56px;
+      color: #cbb88d;
+      margin-top: 58px;
     }
 
     @media (max-width: 600px) {
@@ -174,12 +177,12 @@
 
   <!-- BULLES -->
   <div class="bubbles" id="bubbles">
-    <div class="bubble" style="left:8%;  width:30px; height:30px; --duration:26s; --drift:-30px; animation-duration:26s;"></div>
-    <div class="bubble" style="left:20%; width:50px; height:50px; --duration:34s; --drift:40px;  animation-duration:34s;"></div>
-    <div class="bubble" style="left:38%; width:22px; height:22px; --duration:22s; --drift:-20px; animation-duration:22s;"></div>
-    <div class="bubble" style="left:55%; width:70px; height:70px; --duration:40s; --drift:60px;  animation-duration:40s;"></div>
-    <div class="bubble" style="left:72%; width:34px; height:34px; --duration:28s; --drift:-35px; animation-duration:28s;"></div>
-    <div class="bubble" style="left:88%; width:48px; height:48px; --duration:36s; --drift:25px;  animation-duration:36s;"></div>
+    <div class="bubble" style="left:8%;  width:32px; height:32px; --duration:26s; --drift:-30px; animation-duration:26s;"></div>
+    <div class="bubble" style="left:22%; width:56px; height:56px; --duration:36s; --drift:40px;  animation-duration:36s;"></div>
+    <div class="bubble" style="left:40%; width:24px; height:24px; --duration:22s; --drift:-20px; animation-duration:22s;"></div>
+    <div class="bubble" style="left:58%; width:72px; height:72px; --duration:44s; --drift:60px;  animation-duration:44s;"></div>
+    <div class="bubble" style="left:74%; width:38px; height:38px; --duration:30s; --drift:-35px; animation-duration:30s;"></div>
+    <div class="bubble" style="left:90%; width:50px; height:50px; --duration:40s; --drift:25px;  animation-duration:40s;"></div>
   </div>
 
   <!-- CONTENU -->
@@ -243,7 +246,7 @@
 
       document.getElementById("result").textContent = name;
 
-      /* === RÉACTION SUBTILE AU CLIC === */
+      /* Réaction subtile au clic */
       const bubbles = document.getElementById("bubbles");
       bubbles.classList.add("boost");
       setTimeout(() => bubbles.classList.remove("boost"), 900);
@@ -251,4 +254,4 @@
   </script>
 
 </body>
-</html>
+</html
