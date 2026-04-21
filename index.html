@@ -1,39 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>STAMINA — Générateur de nom de bière</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Helvetica, Arial, sans-serif;
+      background-color: #fafaf7;
+      color: #222;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      text-align: center;
+      max-width: 440px;
+      padding: 32px;
+    }
+
+    .brand {
+      font-size: 14px;
+      color: #7a5c3e;
+      margin-bottom: 32px;
+      line-height: 1.4;
+    }
+
+    h1 {
+      font-size: 36px;
+      font-weight: 500;
+      line-height: 1.1;
+      margin-bottom: 32px;
+    }
+
+    button {
+      background-color: #5e7f68;
+      color: #fff;
+      border: none;
+      padding: 14px 28px;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    #result {
+      font-size: 28px;
+      font-weight: 500;
+      margin-top: 40px;
+    }
+
+    .separator {
+      width: 40px;
+      height: 2px;
+      background-color: #e2b74b;
+      margin: 12px auto 32px;
+    }
+
+    .footer {
+      font-size: 12px;
+      color: #7a5c3e;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="brand">
+    <strong>STAMINA</strong><br>
+    micro-brasserie artisanale
+  </div>
+
+  <h1>
+    Génère<br>
+    ton nom<br>
+    de bière
+  </h1>
+
+  <button onclick="generateName()">Générer</button>
+
+  <div id="result">—</div>
+  <div class="separator"></div>
+
+  <div class="footer">
+    Une création de STAMINA, micro-brasserie artisanale.
+  </div>
+
+</div>
+
 <script>
 function generateName() {
 
-  // STRUCTURE A — Noms abstraits (SEULS)
-  const abstractNames = [
+  // 1️⃣ NOMS ABSTRAITS FORTS
+  const abstract = [
     "La Brume",
     "Le Silence",
     "La Lueur",
     "L’Instant",
     "L’Horizon",
-    "La Saison"
+    "La Saison",
+    "La Matière",
+    "Le Flux",
+    "La Ligne",
+    "L’Onde"
   ];
 
-  // STRUCTURE B — Noms bière (verrouillés et cohérents)
-  const beerNames = [
-    "Le Malt Clair",
-    "Le Malt Mat",
-    "Le Malt Simple",
-    "La Fermentation Lente",
-    "La Fermentation Calme",
-    "Le Houblon Brut",
-    "Le Houblon Libre",
-    "Le Brassin Lent",
-    "La Capsule Pure",
-    "La Capsule Claire"
+  // 2️⃣ STRUCTURES MATIÈRE (nom + adjectif cohérent)
+  const material = [
+    ["Le Malt", ["Clair", "Mat", "Simple", "Juste", "Pur"]],
+    ["La Fermentation", ["Lente", "Calme", "Maîtrisée"]],
+    ["Le Houblon", ["Brut", "Libre", "Expressif"]],
+    ["Le Brassin", ["Lent", "Précis"]],
+    ["La Capsule", ["Pure", "Claire"]],
+    ["La Cuve", ["Ouverte", "Calme"]]
+  ];
+
+  // 3️⃣ STRUCTURES TEMPS / SENSATION
+  const temporal = [
+    "Temps Lent",
+    "Matière Vivante",
+    "Flux Continu",
+    "Saison Courte",
+    "Instant Brut"
+  ];
+
+  // 4️⃣ VARIANTES / ÉDITIONS
+  const editions = [
+    "— Série Courte",
+    "— Variation",
+    "— Batch Unique",
+    "— Édition Limitée"
   ];
 
   let name = "";
+  const roll = Math.random();
 
-  if (Math.random() < 0.5) {
-    name = abstractNames[Math.floor(Math.random() * abstractNames.length)];
-  } else {
-    name = beerNames[Math.floor(Math.random() * beerNames.length)];
+  // STRUCTURE A — Nom abstrait seul
+  if (roll < 0.4) {
+    name = abstract[Math.floor(Math.random() * abstract.length)];
+  }
+
+  // STRUCTURE B — Matière + adjectif
+  else if (roll < 0.75) {
+    const base = material[Math.floor(Math.random() * material.length)];
+    const adjective = base[1][Math.floor(Math.random() * base[1].length)];
+    name = base[0] + " " + adjective;
+  }
+
+  // STRUCTURE C — Abstrait + variation
+  else if (roll < 0.9) {
+    const base = abstract[Math.floor(Math.random() * abstract.length)];
+    const edition = editions[Math.floor(Math.random() * editions.length)];
+    name = base + " " + edition;
+  }
+
+  // STRUCTURE D — Nom manifeste très rare
+  else {
+    name = temporal[Math.floor(Math.random() * temporal.length)];
   }
 
   document.getElementById("result").textContent = name;
 }
 </script>
 
+</body>
+</html>
