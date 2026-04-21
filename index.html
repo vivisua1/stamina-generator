@@ -6,51 +6,74 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Google Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.comf="https://fonts.gstatic.com"oogleapis.com/css2?family=Inter:wght@400;500;600&display=swap" relody {
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== FOND GLOBAL (OPTION B : DÉGRADÉ LÉGER) ===== */
+    body {
       margin: 0;
       padding: 0;
       font-family: 'Inter', Helvetica, Arial, sans-serif;
-      background-color: #fafaf7;
       color: #222;
+      min-height: 100vh;
+
+      background: linear-gradient(
+        180deg,
+        #fafaf7 0%,
+        #f3f2ec 100%
+      );
+
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
     }
 
+    /* ===== CARTE CENTRALE (LANDING PRO) ===== */
     .container {
+      background-color: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(2px);
+
       text-align: center;
-      max-width: 440px;
-      padding: 40px 32px;
+      max-width: 460px;
+      width: 100%;
+      padding: 48px 36px;
+
+      border-radius: 8px;
     }
 
+    /* ===== MARQUE ===== */
     .brand {
       font-size: 13px;
       color: #7a5c3e;
+      line-height: 1.5;
       margin-bottom: 48px;
-      line-height: 1.4;
     }
 
+    /* ===== INTRO ===== */
     .intro {
       font-size: 14px;
       color: #444;
       max-width: 360px;
-      margin: 0 auto 24px auto;
-      line-height: 1.5;
+      margin: 0 auto 28px auto;
+      line-height: 1.6;
     }
 
+    /* ===== TITRE ===== */
     h1 {
       font-size: 28px;
       font-weight: 500;
       line-height: 1.15;
-      margin-bottom: 40px;
+      margin: 0 0 40px 0;
     }
 
+    /* ===== BOUTON ===== */
     button {
       background-color: #5e7f68;
       color: #fff;
       border: none;
-      padding: 14px 32px;
+      padding: 14px 36px;
       font-size: 15px;
       font-weight: 500;
       border-radius: 4px;
@@ -62,6 +85,7 @@
       opacity: 0.9;
     }
 
+    /* ===== RÉSULTAT ===== */
     #result {
       font-size: 36px;
       font-weight: 600;
@@ -74,13 +98,25 @@
       width: 40px;
       height: 2px;
       background-color: #e2b74b;
-      margin: 12px auto 32px;
+      margin: 14px auto 32px;
     }
 
+    /* ===== SIGNATURE ===== */
     .footer {
       font-size: 11px;
       color: #7a5c3e;
       margin-top: 48px;
+    }
+
+    /* ===== TABLETTE (BRASSERIE) ===== */
+    @media (min-width: 768px) {
+      .container {
+        padding: 64px 48px;
+      }
+
+      #result {
+        font-size: 40px;
+      }
     }
   </style>
 </head>
